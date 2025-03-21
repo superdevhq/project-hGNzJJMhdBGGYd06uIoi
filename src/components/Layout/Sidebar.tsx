@@ -42,18 +42,18 @@ const AppSidebar = () => {
   return (
     <SidebarProvider defaultOpen={true}>
       <Sidebar className="border-r">
-        <SidebarHeader className="flex items-center px-6 py-4">
-          <div className="flex items-center gap-3">
-            <div className="rounded-md bg-primary p-1.5">
-              <PieChart className="h-6 w-6 text-primary-foreground" />
+        <SidebarHeader className="flex h-14 items-center border-b px-6">
+          <div className="flex items-center gap-2">
+            <div className="rounded-md bg-primary p-1">
+              <PieChart className="h-5 w-5 text-primary-foreground" />
             </div>
-            <h1 className="text-xl font-bold">CRM Pro</h1>
+            <h1 className="text-lg font-semibold">CRM Pro</h1>
           </div>
         </SidebarHeader>
         <SidebarContent>
-          <SidebarMenu className="px-2">
+          <SidebarMenu className="p-2">
             {menuItems.map((item) => (
-              <SidebarMenuItem key={item.path} className="mb-1">
+              <SidebarMenuItem key={item.path}>
                 <Link to={item.path} className="w-full">
                   <SidebarMenuButton
                     isActive={
@@ -62,7 +62,7 @@ const AppSidebar = () => {
                         : currentPath.startsWith(item.path)
                     }
                     className={cn(
-                      "w-full justify-start py-2.5",
+                      "w-full justify-start gap-2 px-3 py-2",
                       item.path === "/"
                         ? currentPath === "/"
                           ? "bg-primary/10 text-primary"
@@ -73,7 +73,7 @@ const AppSidebar = () => {
                     )}
                   >
                     {item.icon}
-                    <span className="ml-3">{item.name}</span>
+                    <span>{item.name}</span>
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>

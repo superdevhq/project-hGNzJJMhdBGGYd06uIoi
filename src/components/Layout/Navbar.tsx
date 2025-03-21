@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 const Navbar = () => {
   return (
     <div className="border-b bg-background">
-      <div className="flex h-16 items-center px-4 md:px-6">
+      <div className="flex h-14 items-center px-4 md:px-6">
         <div className="ml-auto flex items-center gap-4">
           <div className="relative hidden md:flex">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
