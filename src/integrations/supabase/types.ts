@@ -163,7 +163,7 @@ export type Database = {
           name: string
           stage: string
           updated_at: string
-          user_id: string | null
+          user_id: string
           value: number
         }
         Insert: {
@@ -175,7 +175,7 @@ export type Database = {
           name: string
           stage: string
           updated_at?: string
-          user_id?: string | null
+          user_id: string
           value?: number
         }
         Update: {
@@ -187,7 +187,7 @@ export type Database = {
           name?: string
           stage?: string
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
           value?: number
         }
         Relationships: [
