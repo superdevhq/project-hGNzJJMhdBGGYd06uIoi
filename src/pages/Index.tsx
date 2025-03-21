@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DashboardStats from "@/components/Dashboard/DashboardStats";
-import { RecentActivity } from "@/components/Dashboard/RecentActivity";
+import RecentActivity from "@/components/Dashboard/RecentActivity";
 import { SeedDataButton } from "@/components/SeedDataButton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getDashboardStats } from "@/services/dashboardService";
