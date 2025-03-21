@@ -117,6 +117,7 @@ export type Database = {
           last_name: string
           phone: string | null
           updated_at: string
+          user_id: string
         }
         Insert: {
           company_id?: string | null
@@ -128,6 +129,7 @@ export type Database = {
           last_name: string
           phone?: string | null
           updated_at?: string
+          user_id: string
         }
         Update: {
           company_id?: string | null
@@ -139,6 +141,7 @@ export type Database = {
           last_name?: string
           phone?: string | null
           updated_at?: string
+          user_id?: string
         }
         Relationships: [
           {
@@ -160,6 +163,7 @@ export type Database = {
           name: string
           stage: string
           updated_at: string
+          user_id: string | null
           value: number
         }
         Insert: {
@@ -171,6 +175,7 @@ export type Database = {
           name: string
           stage: string
           updated_at?: string
+          user_id?: string | null
           value?: number
         }
         Update: {
@@ -182,6 +187,7 @@ export type Database = {
           name?: string
           stage?: string
           updated_at?: string
+          user_id?: string | null
           value?: number
         }
         Relationships: [
