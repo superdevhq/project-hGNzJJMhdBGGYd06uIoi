@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { Company } from "@/types";
 import { formatDistanceToNow } from "date-fns";
 import { Building2, MoreHorizontal, Plus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Company } from "@/services/companyService";
 
 interface CompanyListProps {
   companies: Company[];
@@ -73,7 +73,7 @@ const CompanyList = ({
                 <TableHead>Name</TableHead>
                 <TableHead>Industry</TableHead>
                 <TableHead className="hidden md:table-cell">Location</TableHead>
-                <TableHead className="hidden md:table-cell">Employees</TableHead>
+                <TableHead className="hidden md:table-cell">Size</TableHead>
                 <TableHead className="hidden lg:table-cell">Created</TableHead>
                 <TableHead className="w-[50px]"></TableHead>
               </TableRow>
@@ -97,10 +97,10 @@ const CompanyList = ({
                       {company.location}
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      {company.employees}
+                      {company.size}
                     </TableCell>
                     <TableCell className="hidden lg:table-cell">
-                      {formatDistanceToNow(new Date(company.createdAt), {
+                      {company.created_at && formatDistanceToNow(new Date(company.created_at), {
                         addSuffix: true,
                       })}
                     </TableCell>

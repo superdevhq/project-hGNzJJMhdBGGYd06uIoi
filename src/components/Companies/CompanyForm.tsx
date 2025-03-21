@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from "react";
-import { Company } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,11 +10,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Company } from "@/services/companyService";
 
 interface CompanyFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (company: Omit<Company, "id" | "createdAt" | "updatedAt">) => void;
+  onSave: (company: Omit<Company, "id" | "created_at" | "updated_at">) => void;
   company?: Company;
 }
 
@@ -30,19 +30,19 @@ const CompanyForm = ({
     industry: "",
     website: "",
     location: "",
-    employees: 0,
-    revenue: "",
+    size: "",
+    description: "",
   });
 
   useEffect(() => {
     if (company) {
       setFormData({
-        name: company.name,
-        industry: company.industry,
-        website: company.website,
-        location: company.location,
-        employees: company.employees,
-        revenue: company.revenue,
+        name: company.name || "",
+        industry: company.industry || "",
+        website: company.website || "",
+        location: company.location || "",
+        size: company.size || "",
+        description: company.description || "",
       });
     } else {
       setFormData({
@@ -50,19 +50,19 @@ const CompanyForm = ({
         industry: "",
         website: "",
         location: "",
-        employees: 0,
-        revenue: "",
+        size: "",
+        description: "",
       });
     }
   }, [company, isOpen]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "employees" ? parseInt(value) || 0 : value,
+      [name]: value,
     }));
   };
 
@@ -119,27 +119,25 @@ const CompanyForm = ({
                 onChange={handleChange}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="employees">Employees</Label>
-                <Input
-                  id="employees"
-                  name="employees"
-                  type="number"
-                  min="0"
-                  value={formData.employees}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="revenue">Annual Revenue</Label>
-                <Input
-                  id="revenue"
-                  name="revenue"
-                  value={formData.revenue}
-                  onChange={handleChange}
-                />
-              </div>
+            <div className="grid gap-2">
+              <Label htmlFor="size">Company Size</Label>
+              <Input
+                id="size"
+                name="size"
+                value={formData.size}
+                onChange={handleChange}
+                placeholder="e.g. Small, Medium, Enterprise"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="description">Description</Label>
+              <Input
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Brief description of the company"
+              />
             </div>
           </div>
           <DialogFooter>
