@@ -5,12 +5,14 @@ import AppSidebar from "./Sidebar";
 
 const MainLayout = () => {
   return (
-    <div className="grid min-h-screen grid-cols-1 md:grid-cols-[240px_1fr]">
+    <div className="grid min-h-screen grid-cols-1 bg-slate-50 dark:bg-slate-950 md:grid-cols-[260px_1fr]">
       <AppSidebar />
       <div className="flex flex-col">
         <Navbar />
-        <main className="flex-1 p-4 md:p-6">
-          <Outlet />
+        <main className="flex-1 p-5 md:p-8">
+          <div className="mx-auto max-w-7xl">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
