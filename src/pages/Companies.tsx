@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from "react";
-import { Company } from "@/types";
 import { toast } from "@/hooks/use-toast";
 import CompanyList from "@/components/Companies/CompanyList";
 import CompanyForm from "@/components/Companies/CompanyForm";
@@ -8,7 +7,8 @@ import {
   getCompanies, 
   createCompany, 
   updateCompany, 
-  deleteCompany 
+  deleteCompany,
+  Company
 } from "@/services/companyService";
 import { Loader2 } from "lucide-react";
 
@@ -70,7 +70,7 @@ const Companies = () => {
   };
 
   const handleSaveCompany = async (
-    companyData: Omit<Company, "id" | "createdAt" | "updatedAt">
+    companyData: Omit<Company, "id" | "created_at" | "updated_at" | "user_id">
   ) => {
     try {
       if (currentCompany) {

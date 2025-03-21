@@ -5,6 +5,7 @@ import { Tables } from "@/integrations/supabase/types";
 export type Company = Tables<"companies">;
 
 export async function getCompanies(): Promise<Company[]> {
+  // This will automatically filter by the current user due to RLS policies
   const { data, error } = await supabase
     .from("companies")
     .select("*")
@@ -19,6 +20,7 @@ export async function getCompanies(): Promise<Company[]> {
 }
 
 export async function getCompanyById(id: string): Promise<Company | null> {
+  // This will automatically filter by the current user due to RLS policies
   const { data, error } = await supabase
     .from("companies")
     .select("*")
@@ -33,10 +35,23 @@ export async function getCompanyById(id: string): Promise<Company | null> {
   return data;
 }
 
-export async function createCompany(company: Omit<Company, "id" | "created_at" | "updated_at">): Promise<Company> {
+export async function createCompany(company: Omit<Company, "id" | "created_at" | "updated_at" | "user_id">): Promise<Company> {
+  // Get the current user
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  if (!user) {
+    throw new Error("User must be logged in to create a company");
+  }
+  
+  // Add the user_id to the company data
+  const companyWithUserId = {
+    ...company,
+    user_id: user.id
+  };
+  
   const { data, error } = await supabase
     .from("companies")
-    .insert([company])
+    .insert([companyWithUserId])
     .select()
     .single();
 
@@ -48,7 +63,8 @@ export async function createCompany(company: Omit<Company, "id" | "created_at" |
   return data;
 }
 
-export async function updateCompany(id: string, company: Partial<Omit<Company, "id" | "created_at" | "updated_at">>): Promise<Company> {
+export async function updateCompany(id: string, company: Partial<Omit<Company, "id" | "created_at" | "updated_at" | "user_id">>): Promise<Company> {
+  // RLS will ensure users can only update their own companies
   const { data, error } = await supabase
     .from("companies")
     .update(company)
@@ -65,6 +81,7 @@ export async function updateCompany(id: string, company: Partial<Omit<Company, "
 }
 
 export async function deleteCompany(id: string): Promise<void> {
+  // RLS will ensure users can only delete their own companies
   const { error } = await supabase
     .from("companies")
     .delete()

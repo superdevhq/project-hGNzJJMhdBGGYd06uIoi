@@ -15,7 +15,7 @@ import { Company } from "@/services/companyService";
 interface CompanyFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (company: Omit<Company, "id" | "created_at" | "updated_at">) => void;
+  onSave: (company: Omit<Company, "id" | "created_at" | "updated_at" | "user_id">) => void;
   company?: Company;
 }
 
@@ -98,7 +98,6 @@ const CompanyForm = ({
                 name="industry"
                 value={formData.industry}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="grid gap-2">
