@@ -26,7 +26,7 @@ const Index = () => {
     const stageDeals = mockDeals.filter((deal) => deal.stage === stage);
     const value = stageDeals.reduce((sum, deal) => sum + deal.value, 0);
     const count = stageDeals.length;
-    
+
     return {
       name: label,
       value,
